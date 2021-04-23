@@ -8,6 +8,15 @@ class Airline < ApplicationRecord
     .where('age >= ?', 18)
     .distinct
   end
-end
 
-# .order(:name)
+  def passenger_count
+    passengers.size
+  end
+
+  def order_by_frequent_flyers
+    flights.join(:passenger)
+    .group(:id)
+    .order("passengers.*, count(passengers.flights) as frequent_passenger")
+    .order(frequent_passenger: :desc)
+  end
+end

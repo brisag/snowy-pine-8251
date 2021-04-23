@@ -18,6 +18,9 @@ RSpec.describe Airline, type: :model do
     @flight_passengers_3 = FlightPassenger.create(flight: @flight_1, passenger: @passenger_3)
     @flight_passengers_4 = FlightPassenger.create(flight: @flight_2, passenger: @passenger_4)
     @flight_passengers_5 = FlightPassenger.create(flight: @flight_2, passenger: @passenger_5)
+    @flight_passengers_9 = FlightPassenger.create(flight: @flight_2, passenger: @passenger_1)
+    @flight_passengers_10 = FlightPassenger.create(flight: @flight_2, passenger: @passenger_2)
+
 
   end
   describe 'relationships' do
@@ -28,6 +31,8 @@ RSpec.describe Airline, type: :model do
     describe 'find_adult_passengers' do
       it 'list distinct passengers who are older than 19 yrs' do
         expect(@airline_1.find_adult_passengers).to eq([@passenger_1, @passenger_2, @passenger_4])
+        expect(@airline_1.find_adult_passengers).to_not eq([@passenger_1, @passenger_2, @passenger_4, @passenger_1, @passenger_2])
+
         expect(@airline_1.find_adult_passengers).to_not eq([@passenger_3, @passenger_5])
         expect(@passenger_3.age).to eq(17)
       end
