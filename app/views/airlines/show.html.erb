@@ -1,0 +1,5 @@
+  <h2> Welcome to <%=  @airline.name%> Airlines</h2>
+  <p> Passengers on this airline: </p>
+  <% @airline.find_adult_passengers.each do |passenger| %>
+  <%=  passenger.name %><br>
+  <% end %>
